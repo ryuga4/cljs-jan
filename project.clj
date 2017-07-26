@@ -10,7 +10,8 @@
                  [org.clojure/clojurescript "0.0-2371"]
                  [org.clojure/clojure "1.6.0"]
                  [hiccup "1.0.5"]
-                 [ring/ring-jetty-adapter "0.3.8"]]
+                 [ring/ring-jetty-adapter "0.3.8"]
+                 [com.novemberain/monger "3.1.0"]]
 
   :plugins [[lein-ring "0.8.13"]
             [com.cemerick/austin "0.2.0-SNAPSHOT"]
