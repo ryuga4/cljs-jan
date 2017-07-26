@@ -5,12 +5,12 @@
   :min-lein-version "2.3.4"
 
   :source-paths ["src" "src/cljs"]
-
   :dependencies [[compojure "1.2.1"]
                  [ring "1.3.1"]
                  [org.clojure/clojurescript "0.0-2371"]
                  [org.clojure/clojure "1.6.0"]
-                 [hiccup "1.0.5"]]
+                 [hiccup "1.0.5"]
+                 [ring/ring-jetty-adapter "0.3.8"]]
 
   :plugins [[lein-ring "0.8.13"]
             [com.cemerick/austin "0.2.0-SNAPSHOT"]

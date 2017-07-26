@@ -1,8 +1,10 @@
 (ns cljs.handler
+  (:use [ring.adapter.jetty])
   (:require [cljs.layout :refer [say]]
             [compojure.core :refer :all]
             [compojure.handler :as handler]
-            [compojure.route :as route]))
+            [compojure.route :as route]
+            ))
 
 (defroutes app-routes
 
@@ -13,3 +15,8 @@
 
 (def app
   (handler/site app-routes))
+
+
+(defn -main []
+  (let [port (Integer/parseInt (get (System/getenv) "PORT" "8080"))]
+    (run-jetty app {:port port})))
