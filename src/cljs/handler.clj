@@ -4,9 +4,10 @@
             [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [ring.util.response :refer [response]]
+            [ring.util.response :refer [response content-type]]
             [ring.middleware.json :refer [wrap-json-response wrap-json-params]]
             [cljs.db :as db]
+            [ring.util.json-response :refer [json-response]]
             ))
 
 
@@ -14,9 +15,9 @@
 (defroutes app-routes
 
   (GET "/" [] (response "I am ready to be created!"))
-  (GET "/users" [] (-> (db/total-data)
-                       (response)
-                       (ring.util.response/content-type "json")))
+  (GET "/users" [] (let [res (db/total-data)]
+                     (response res)))
+
   (GET "/test" [dupa] (response dupa))
   (GET "/send-money" [id1 id2 money] (db/send-money id1 id2 (. Integer parseInt  money))
                                      (response "Przesłane"))
@@ -26,13 +27,14 @@
                                  (response "Dodany użytkownik")))
   (POST "/send-money" {:keys [params]} (do (let [{:keys [id id2 money]} params]
                                              (db/send-money id id2 money))
-                                           (response "Dodany użytkownik")))
+                                           (response "Przesłane")))
   (POST "/add-friend" {:keys [params]} (do (let [{:keys [id id2]} params]
                                              (db/add-friend id id2))
-                                           (response "Dodany użytkownik")))
+                                           (response "Dodany znajomy")))
   (POST  "/add-user" {:keys [params]} (do (let [{:keys [id name]} params]
                                             (db/add-user id name))
                                           (response "Dodany użytkownik")))
+
 
   (GET "/delete-all" [] (do (db/delete-all)
                             (response "Usunięto wszystkich")))
