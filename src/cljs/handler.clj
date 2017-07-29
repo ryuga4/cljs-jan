@@ -1,6 +1,6 @@
 (ns cljs.handler
   (:use [ring.adapter.jetty])
-  (:require [cljs.layout :refer [say]]
+  (:require
             [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
@@ -12,7 +12,7 @@
 1
 (defroutes app-routes
 
-  (GET "/" [] (say "I am ready to be created!"))
+  (GET "/" [] (response "I am ready to be created!"))
   (GET "/users" [] (-> (db/total-data)
                        (response)
                        (ring.util.response/content-type "json")))

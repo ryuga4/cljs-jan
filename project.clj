@@ -7,7 +7,6 @@
   :source-paths ["src" "src/cljs"]
   :dependencies [[compojure "1.2.1"]
                  [ring "1.3.1"]
-                 [org.clojure/clojurescript "0.0-2371"]
                  [org.clojure/clojure "1.6.0"]
                  [hiccup "1.0.5"]
                  [ring/ring-jetty-adapter "0.3.8"]
@@ -19,15 +18,9 @@
             [com.cemerick/austin "0.2.0-SNAPSHOT"]
             [lein-cljsbuild "1.0.3"]]
 
-  :hooks [leiningen.cljsbuild]
+
   :main cljs.handler
-  :cljsbuild {
-    :builds [{:source-paths ["src/cljs/cljs"]
-              :compiler {:output-to "resources/public/js/cljs.js"
-                         :optimizations :whitespace
-                         :pretty-print true
-                         ;; :source-map "resources/public/js/cljs.js.map"
-                         }}]}
+
 
   :ring {:handler cljs.handler/app}
 
