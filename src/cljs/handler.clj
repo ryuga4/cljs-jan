@@ -28,9 +28,9 @@
   (POST "/send-money" {:keys [params]} (do (let [{:keys [id id2 money]} params]
                                              (db/send-money id id2 money))
                                            (response "Przesłane")))
-  (POST "/add-friend" {:keys [params]} (do (let [{:keys [id id2]} params]
-                                             (db/add-friend id id2))
-                                           (response "Dodany znajomy")))
+  (POST "/add-friend" {:keys [params]} (do (let [{:keys [id1 id2]} params]
+                                             (db/add-friend id1 id2))
+                                           (response "Dodany zn1ajomy")))
   (POST  "/add-user" {:keys [params]} (do (let [{:keys [id name]} params]
                                             (db/add-user id name))
                                           (response "Dodany użytkownik")))
