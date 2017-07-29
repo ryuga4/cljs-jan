@@ -4,19 +4,27 @@
             [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [monger.core :as mg]
-            [monger.collection :as mc]
-            )
-  (:import [com.mongodb DB WriteConcern MongoOptions ServerAddress
-                        ]
-           (org.bson.types ObjectId)))
+            [ring.util.response :refer [response]]
+            [cljs.db :as db]
+            ))
 
-(def uri (System/getenv "MONGODB_URI"))
+
 
 (defroutes app-routes
 
   (GET "/" [] (say "I am ready to be created!"))
-
+  (GET "/users" [] (-> (db/total-data)
+                       (response)
+                       (ring.util.response/content-type "json")))
+  (GET "/test" [dupa] (response dupa))
+  (GET "/send-money" [id1 id2 money] (db/send-money id1 id2 (. Integer parseInt  money))
+                                     (response "Przesłane"))
+  (GET "/add-friend" [id1 id2] (do (db/add-friend id1 id2)
+                                   (response "Dodany znajomy")))
+  (GET "/add-user" [id name] (do (db/add-user id name)
+                                 (response "Dodany użytkownik")))
+  (GET "/delete-all" [] (do (db/delete-all)
+                            (response "Usunięto wszystkich")))
   (route/resources "/")
   (route/not-found "not found"))
 
@@ -29,5 +37,6 @@
     (run-jetty app {:port port})))
 
 
-(let [{:keys [conn db]} (mg/connect-via-uri uri)]
-  (mc/insert db "Coll" {:_id (ObjectId.) :imie "dupa"}))
+
+
+

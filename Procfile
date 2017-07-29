@@ -1,1 +1,1 @@
-web: lein run -m cljs.handler
+web: lein run

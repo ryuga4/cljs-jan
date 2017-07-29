@@ -11,14 +11,16 @@
                  [org.clojure/clojure "1.6.0"]
                  [hiccup "1.0.5"]
                  [ring/ring-jetty-adapter "0.3.8"]
-                 [com.novemberain/monger "3.1.0"]]
+                 [com.novemberain/monger "3.1.0"]
+                 [lein-environ "0.4.0"]
+                 [ring/ring-json "0.4.0"]]
 
   :plugins [[lein-ring "0.8.13"]
             [com.cemerick/austin "0.2.0-SNAPSHOT"]
             [lein-cljsbuild "1.0.3"]]
 
   :hooks [leiningen.cljsbuild]
-
+  :main cljs.handler
   :cljsbuild {
     :builds [{:source-paths ["src/cljs/cljs"]
               :compiler {:output-to "resources/public/js/cljs.js"
@@ -40,5 +42,6 @@
                                    (cemerick.austin/repl-env)))
                         (defn browser-repl []
                           (cemerick.austin.repls/cljs-repl
-                            (browser-repl-env)))]}
+                            (browser-repl-env)))]
+           :env {:mongodb_uri "mongodb://heroku_s7n8h4sj:rads5hr91viec1asgo1brvlaq1@ds125623.mlab.com:25623/heroku_s7n8h4sj"}}
      })
