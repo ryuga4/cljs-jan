@@ -9,7 +9,7 @@
             ))
 
 
-
+1
 (defroutes app-routes
 
   (GET "/" [] (say "I am ready to be created!"))
@@ -23,6 +23,13 @@
                                    (response "Dodany znajomy")))
   (GET "/add-user" [id name] (do (db/add-user id name)
                                  (response "Dodany użytkownik")))
+  (POST "/send-money" [id1 id2 money] (db/send-money id1 id2 (. Integer parseInt  money))
+                                              (response "Przesłane"))
+  (POST "/add-friend" [id1 id2] (do (db/add-friend id1 id2)
+                                            (response "Dodany znajomy")))
+  (POST  "/add-user" [id name] (do (db/add-user id name)
+                                          (response "Dodany użytkownik")))
+
   (GET "/delete-all" [] (do (db/delete-all)
                             (response "Usunięto wszystkich")))
   (route/resources "/")
