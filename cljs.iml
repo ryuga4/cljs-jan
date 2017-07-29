@@ -5,7 +5,6 @@
     <output-test url="file://$MODULE_DIR$/target/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src/cljs/cljs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/cljs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/resources" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
@@ -16,7 +15,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Leiningen: args4j:2.0.26" level="project" />
+    <orderEntry type="library" name="Leiningen: args4j:2.0.16" level="project" />
     <orderEntry type="library" name="Leiningen: cheshire:5.5.0" level="project" />
     <orderEntry type="library" name="Leiningen: clj-stacktrace:0.2.7" level="project" />
     <orderEntry type="library" name="Leiningen: clj-time:0.6.0" level="project" />
@@ -29,10 +28,9 @@
     <orderEntry type="library" name="Leiningen: com.fasterxml.jackson.dataformat/jackson-dataformat-cbor:2.5.3" level="project" />
     <orderEntry type="library" name="Leiningen: com.fasterxml.jackson.dataformat/jackson-dataformat-smile:2.5.3" level="project" />
     <orderEntry type="library" name="Leiningen: com.google.code.findbugs/jsr305:1.3.9" level="project" />
-    <orderEntry type="library" name="Leiningen: com.google.guava/guava:17.0" level="project" />
-    <orderEntry type="library" name="Leiningen: com.google.javascript/closure-compiler-externs:v20140625" level="project" />
-    <orderEntry type="library" name="Leiningen: com.google.javascript/closure-compiler:v20140625" level="project" />
-    <orderEntry type="library" name="Leiningen: com.google.protobuf/protobuf-java:2.5.0" level="project" />
+    <orderEntry type="library" name="Leiningen: com.google.guava/guava:18.0" level="project" />
+    <orderEntry type="library" name="Leiningen: com.google.javascript/closure-compiler:v20131014" level="project" />
+    <orderEntry type="library" name="Leiningen: com.google.protobuf/protobuf-java:2.4.1" level="project" />
     <orderEntry type="library" name="Leiningen: com.novemberain/monger:3.1.0" level="project" />
     <orderEntry type="library" name="Leiningen: commons-codec:1.6" level="project" />
     <orderEntry type="library" name="Leiningen: commons-fileupload:1.3" level="project" />
@@ -48,15 +46,15 @@
     <orderEntry type="library" name="Leiningen: medley:0.5.3" level="project" />
     <orderEntry type="library" name="Leiningen: ns-tracker:0.2.2" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/clojure:1.6.0" level="project" />
-    <orderEntry type="library" name="Leiningen: org.clojure/clojurescript:0.0-2371" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/clojurescript:0.0-2227" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/data.json:0.2.3" level="project" />
-    <orderEntry type="library" name="Leiningen: org.clojure/google-closure-library-third-party:0.0-20140718-946a7d39" level="project" />
-    <orderEntry type="library" name="Leiningen: org.clojure/google-closure-library:0.0-20140718-946a7d39" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/google-closure-library-third-party:0.0-20140226-71326067" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/google-closure-library:0.0-20140226-71326067" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/java.classpath:0.2.2" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/tools.macro:0.1.5" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/tools.namespace:0.2.4" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/tools.nrepl:0.2.12" level="project" />
-    <orderEntry type="library" name="Leiningen: org.clojure/tools.reader:0.8.9" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/tools.reader:0.8.3" level="project" />
     <orderEntry type="library" name="Leiningen: org.json/json:20090211" level="project" />
     <orderEntry type="library" name="Leiningen: org.mongodb/bson:3.3.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.mongodb/mongodb-driver-core:3.3.0" level="project" />

@@ -5,11 +5,12 @@
             [compojure.handler :as handler]
             [compojure.route :as route]
             [ring.util.response :refer [response]]
+            [ring.middleware.json :refer [wrap-json-response wrap-json-params]]
             [cljs.db :as db]
             ))
 
 
-1
+
 (defroutes app-routes
 
   (GET "/" [] (response "I am ready to be created!"))
@@ -23,11 +24,14 @@
                                    (response "Dodany znajomy")))
   (GET "/add-user" [id name] (do (db/add-user id name)
                                  (response "Dodany użytkownik")))
-  (POST "/send-money" [id1 id2 money] (db/send-money id1 id2 (. Integer parseInt  money))
-                                              (response "Przesłane"))
-  (POST "/add-friend" [id1 id2] (do (db/add-friend id1 id2)
-                                            (response "Dodany znajomy")))
-  (POST  "/add-user" [id name] (do (db/add-user id name)
+  (POST "/send-money" {:keys [params]} (do (let [{:keys [id id2 money]} params]
+                                             (db/send-money id id2 money))
+                                           (response "Dodany użytkownik")))
+  (POST "/add-friend" {:keys [params]} (do (let [{:keys [id id2]} params]
+                                             (db/add-friend id id2))
+                                           (response "Dodany użytkownik")))
+  (POST  "/add-user" {:keys [params]} (do (let [{:keys [id name]} params]
+                                            (db/add-user id name))
                                           (response "Dodany użytkownik")))
 
   (GET "/delete-all" [] (do (db/delete-all)
@@ -35,8 +39,9 @@
   (route/resources "/")
   (route/not-found "not found"))
 
-(def app
-  (handler/site app-routes))
+(def app (->
+           (handler/site app-routes)
+           wrap-json-params))
 
 
 
