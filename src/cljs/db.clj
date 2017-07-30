@@ -50,8 +50,9 @@
 (defn accept
   [id id2]
   (let [id_map (mc/find-one-as-map db coll {:id id2})
-        money (- (get-in (mc/find-one-as-map db coll {:id id}) [:propositions (keyword id2)]))]
-    (mc/update db coll {:id id2} (assoc-in id_map [:propositions id] money))))
+        money (get-in (mc/find-one-as-map db coll {:id id}) [:propositions (keyword id2)])]
+    (when (not (nil? money))
+      (mc/update db coll {:id id2} (assoc-in id_map [:propositions id] (- money))))))
 
 (defn check-deal
   [id id2]
@@ -68,7 +69,8 @@
                                id2_map))
         money1 (get-in (mc/find-one-as-map db coll {:id id}) [:propositions (keyword id2)])
         money2 (get-in (mc/find-one-as-map db coll {:id id2}) [:propositions (keyword id)])]
-    (when (= money1 (- money2))
+    (when (and (not (some nil? [money1 money2]))
+               (= money1 (- money2)))
       (do (mc/update db coll {:id id} (-> id_map_2
                                           (update-in [:deals id2] + money1)
                                           (assoc-in [:propositions id2] 0)))
