@@ -47,7 +47,7 @@
     <orderEntry type="library" name="Leiningen: ns-tracker:0.2.2" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/clojure:1.6.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/clojurescript:0.0-2227" level="project" />
-    <orderEntry type="library" name="Leiningen: org.clojure/data.json:0.2.3" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/data.json:0.2.6" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/google-closure-library-third-party:0.0-20140226-71326067" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/google-closure-library:0.0-20140226-71326067" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/java.classpath:0.2.2" level="project" />

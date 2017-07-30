@@ -1,6 +1,7 @@
 (ns cljs.db
   (:require [monger.core :as mg]
-            [monger.collection :as mc])
+            [monger.collection :as mc]
+            [clojure.data.json :as json])
   (:import [com.mongodb DB WriteConcern MongoOptions ServerAddress
                         ]
            (org.bson.types ObjectId)))
@@ -16,7 +17,7 @@
 (defn add-user
   [id name]
   (if (some nil? [id name]) nil
-    (mc/insert db coll {:_id (ObjectId.) :id id :name name :deals {}}))
+    (mc/insert db coll {:id id :name name :deals {}}))
   )
 
 (defn print-ret

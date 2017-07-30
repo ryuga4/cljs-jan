@@ -13,7 +13,8 @@
                  [com.novemberain/monger "3.1.0"]
                  [lein-environ "0.4.0"]
                  [ring/ring-json "0.4.0"]
-                 [ring-json-response "0.2.0"]]
+                 [ring-json-response "0.2.0"]
+                 [org.clojure/data.json "0.2.6"]]
 
   :plugins [[lein-ring "0.8.13"]
             [com.cemerick/austin "0.2.0-SNAPSHOT"]

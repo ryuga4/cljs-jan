@@ -8,6 +8,7 @@
             [ring.middleware.json :refer [wrap-json-response wrap-json-params]]
             [cljs.db :as db]
             [ring.util.json-response :refer [json-response]]
+            [clojure.data.json :as json]
             ))
 
 
@@ -18,7 +19,7 @@
   (GET "/users" [] (let [res (db/total-data)]
                      (response res)))
 
-  (GET "/test" [dupa] (response dupa))
+  (GET "/test" [dupa] (response (json/write-str {:a "ąąą"})))
   (GET "/send-money" [id1 id2 money] (db/send-money id1 id2 (. Integer parseInt  money))
                                      (response "Przesłane"))
   (GET "/add-friend" [id1 id2] (do (db/add-friend id1 id2)
@@ -31,6 +32,7 @@
   (POST "/add-friend" {:keys [params]} (do (let [{:keys [id1 id2]} params]
                                              (db/add-friend id1 id2))
                                            (response "Dodany zn1ajomy")))
+
   (POST  "/add-user" {:keys [params]} (do (let [{:keys [id name]} params]
                                             (db/add-user id name))
                                           (response "Dodany użytkownik")))
