@@ -17,7 +17,7 @@
 (defn add-user
   [id name]
   (if (some nil? [id name]) nil
-    (mc/insert db coll {:id id :name name :deals {}}))
+    (mc/insert db coll {:id id :name name :deals {} :propositions {}}))
   )
 
 (defn print-ret
@@ -42,6 +42,40 @@
     (mc/update db coll {:id id}  (update-in id_map_2 [:deals id2] + money))
     (mc/update db coll {:id id2} (update-in id2_map_2 [:deals id] - money))
     ))
+(defn propose
+  [id id2 money]
+  (let [id_map (mc/find-one-as-map db coll {:id id2})]
+    (mc/update db coll {:id id2} (assoc-in id_map [:propositions id] money))))
+
+(defn accept
+  [id id2]
+  (let [id_map (mc/find-one-as-map db coll {:id id2})
+        money (- (get-in (mc/find-one-as-map db coll {:id id}) [:propositions (keyword id2)]))]
+    (mc/update db coll {:id id2} (assoc-in id_map [:propositions id] money))))
+
+(defn check-deal
+  [id id2]
+  (let [id_map (mc/find-one-as-map db coll {:id id})
+        id2_map (mc/find-one-as-map db coll {:id id2})
+        deals (id_map :deals)
+        deals2 (id_map :deals)
+
+        id_map_2 (print-ret (if (some nil? [deals (deals id2)])
+                              (assoc-in id_map [:deals id2] 0)
+                              id_map))
+        id2_map_2 (print-ret (if (some nil? [deals2 (deals id)])
+                               (assoc-in id2_map [:deals id] 0)
+                               id2_map))
+        money1 (get-in (mc/find-one-as-map db coll {:id id}) [:propositions (keyword id2)])
+        money2 (get-in (mc/find-one-as-map db coll {:id id2}) [:propositions (keyword id)])]
+    (when (= money1 (- money2))
+      (do (mc/update db coll {:id id} (-> id_map_2
+                                          (update-in [:deals id2] + money1)
+                                          (assoc-in [:propositions id2] 0)))
+          (mc/update db coll {:id id2} (-> id2_map_2
+                                           (update-in [:deals id] + money2)
+                                           (assoc-in [:propositions id] 0))))
+      )))
 
 (defn add-friend
   [id id2]

@@ -34,6 +34,11 @@
                             (response "Usunięto wszystkich")))
 
   (GET "/get-one" [id] (toResponse (:deals (db/get-one id))))
+  (GET "/propose" [id1 id2 money] (do (db/propose id1 id2 money)))
+  (GET "/accept" [id1 id2] (do (db/accept id1 id2)
+                               (response "Zaakceptowano")))
+  (GET "/check-deal" [id1 id2] (do (db/check-deal id1 id2)
+                                   (response "Deal!")))
   (route/resources "/")
   (route/not-found "not found"))
 
