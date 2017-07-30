@@ -5,7 +5,7 @@
             [compojure.handler :as handler]
             [compojure.route :as route]
             [ring.util.response :refer [response content-type]]
-            [ring.middleware.json :refer [wrap-json-response wrap-json-params]]
+            [ring.middleware.json :refer [wrap-json-response wrap-json-params wrap-json-body]]
             [cljs.db :as db]
             [ring.util.json-response :refer [json-response]]
             [clojure.data.json :as json]
@@ -16,7 +16,8 @@
 (defroutes app-routes
 
   (GET "/" [] (response "I am ready to be created!"))
-  (GET "/users" [] (let [res (db/total-data)]
+  (GET "/users" [] (let [res (json/read-str (json/write-str (map #(dissoc % :_id) (db/total-data))))]
+                     (println res)
                      (response res)))
 
   (GET "/test" [dupa] (response (json/write-str {:a "ąąą"})))
@@ -45,7 +46,9 @@
 
 (def app (->
            (handler/site app-routes)
-           wrap-json-params))
+           (wrap-json-body)
+           (wrap-json-params)
+           (wrap-json-response)))
 
 
 
